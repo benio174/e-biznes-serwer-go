@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "==== Uruchamiam statyczną analizę kodu Go przed commitem ===="
+
+cd echo-crud-api
+
+go fmt ./...
+
+go vet ./...
+
+if [ $? -ne 0 ]; then
+    echo " Błąd: Analiza kodu wykryła problemy"
+    exit 1
+fi
+
+echo " Analiza kodu zakończona sukcesem"
+exit 0
